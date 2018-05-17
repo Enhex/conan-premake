@@ -61,11 +61,17 @@ class PremakeGeneratorPackage(ConanFile):
     version = "master"
     url = "https://github.com/enhex/conan-premake"
     license = "MIT"
-
+    exports = 'premake.py'
+	
     def build(self):
         pass
 
+    def package(self):
+        self.copy('premake.py')
+		
     def package_info(self):
         self.cpp_info.includedirs = []
         self.cpp_info.libdirs = []
         self.cpp_info.bindirs = []
+		
+        self.env_info.PYTHONPATH.append(self.package_folder)
